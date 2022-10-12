@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
@@ -68,8 +69,8 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 			.setSubject(userDetails.getUserId())
 			.setExpiration(
 				new Date(System.currentTimeMillis() + Long.parseLong(env.getProperty("token.expiration_time"))))
-			.signWith(Keys.hmacShaKeyFor(Objects.requireNonNull(env.getProperty("token.secret")).getBytes()),
-				SignatureAlgorithm.ES512)
+			.signWith(Keys.hmacShaKeyFor((env.getProperty("token.secret")).getBytes(StandardCharsets.UTF_8)),
+				SignatureAlgorithm.HS256)
 			.compact();
 
 		response.addHeader("token", token);

@@ -20,13 +20,17 @@ import java.util.Objects;
 
 @Slf4j
 @Component
-@RequiredArgsConstructor
 public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<AuthorizationHeaderFilter.Config> {
 
     private final Environment env;
 
     public static class Config {
 
+    }
+
+    public AuthorizationHeaderFilter(  Environment env) {
+        super(AuthorizationHeaderFilter.Config.class);
+        this.env = env;
     }
 
     @Override
