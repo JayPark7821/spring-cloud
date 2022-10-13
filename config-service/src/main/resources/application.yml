@@ -6,7 +6,11 @@ spring:
     name: config-server
   profiles:
     active: native
-
+  rabbitmq:
+    host:
+    port:
+    username:
+    password:
   cloud:
     config:
       server:
@@ -19,3 +23,9 @@ spring:
 
 
 #          uri: file:///c:/project/git-local-repo
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, busrefresh
