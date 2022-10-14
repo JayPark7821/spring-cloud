@@ -4,11 +4,7 @@ server:
 spring:
   application:
     name: user-service
-  rabbitmq:
-    host:
-    port:
-    username:
-    password:
+
   h2:
     console:
       enabled: true
