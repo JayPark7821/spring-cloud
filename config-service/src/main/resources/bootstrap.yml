@@ -1,0 +1,6 @@
+encrypt:
+#  key: awleskfjoasuidhgikuh12o98urhf89rehg3j2kn4fv89dtfhvhniuk23n890vfds098fu34wf9nj
+  key-store:
+    location: file:///${user.home}/keystore/apiEnckey.jks
+    password: test1234
+    alias: apiEnckey
