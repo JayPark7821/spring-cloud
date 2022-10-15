@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.orderservice.dto.OrderDto;
 import com.example.orderservice.jpa.OrderEntity;
+import com.example.orderservice.messagequeue.KafkaProducer;
 import com.example.orderservice.service.OrderService;
 import com.example.orderservice.vo.RequestOrder;
 import com.example.orderservice.vo.ResponseOrder;
@@ -30,6 +31,7 @@ public class OrderController {
 
 	private final Environment env;
 	private final OrderService orderService;
+	private final KafkaProducer kafkaProducer;
 
 
 	@GetMapping("/health_check")
@@ -40,7 +42,7 @@ public class OrderController {
 
 
 	@PostMapping("/{userId}/orders")
-	public ResponseEntity<ResponseOrder> createUser(@PathVariable("userId") String userId, @RequestBody RequestOrder order) {
+	public ResponseEntity<ResponseOrder> createOrder(@PathVariable("userId") String userId, @RequestBody RequestOrder order) {
 		ModelMapper mapper = new ModelMapper();
 		mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 
@@ -48,13 +50,14 @@ public class OrderController {
 		orderDto.setUserId(userId);
 		OrderDto createdOrder = orderService.createOrder(orderDto);
 
-
 		ResponseOrder responseOrder = mapper.map(createdOrder, ResponseOrder.class);
+
+		kafkaProducer.send("example-catalog-topic", orderDto);
 		return ResponseEntity.status(HttpStatus.CREATED).body(responseOrder);
 	}
 
 	@GetMapping("/{userId}/orders")
-	public ResponseEntity<List<ResponseOrder>> createUser(@PathVariable("userId") String userId) {
+	public ResponseEntity<List<ResponseOrder>> getOrder(@PathVariable("userId") String userId) {
 		Iterable<OrderEntity> orderList = orderService.getAllOrdersByUserId(userId);
 
 		List<ResponseOrder> result = new ArrayList<>();
