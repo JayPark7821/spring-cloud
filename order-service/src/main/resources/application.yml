@@ -14,10 +14,10 @@ spring:
     hibernate:
       ddl-auto: update
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:testdb
-    username: sa
-    password:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: '{cipher}AQCDvjx2znwqWgiP1dCJFjmqDlZPGHz6apVFsY4X2cVB/KnHlYkstGviVGZIa2gjpx1bu7JrKN3siXh6OZgCRDC/MhGbVeMDCStHOxVN1FamZ9ZmxKlFlnzLrfh0/6pfkCFo8M0q9l+D19P3gfCnap5I2l9xq1N6txrcdJAWfPiyrL05hY+kBG9uNANjjV+us0ezDNre2VHN+tDwhRTd7ExNhfilBCR60rtIv4ULge8iP7ZFmA/2eJO3Is1XiDy4qcNxFJH0ol7nkmunVB9rUMVXueUQHH+NUVUaOjeay93HWkv0/4nPGv9zRYjWAjuMM776bbRNPk/6aLbTIQCV895rfhcQrWNh9nUCjZMIYbsCQOsVfZo0wgByG/8Gk8uWHT/4sNRJlrynlTm00GWmzFoOF6krJQ+98ZXaX5JyOjsoKRN1eHpo6RR7mMIiWMF/YxU='
+    username: '{cipher}AQAvhmqm6jPzACZMF+t3JyV2VPf7F4W5m+M/ZuFtDfhABCmSgCdWZT11/MPpe5hJ3DB7n6qTyss42vses8smg0KqOlm97UEDcgIxhSAo/GGRU3g9tRwittO1ajEzS31pMbkClpoTnquSgNkvsPhtUg6wYLLzD1T/ZeXqB/iOS+9fJC56Q3qV/XhgUtof4+R2gmbcIasA7Bz2J2sbYHx6ncOAh9/9D1WKOF5Q1etVrD1JXrGPAEAAA2ZcgX4j9krE5evEi66bsnL/tWCXykeZY2RL1VfYugEDDVRWeLy4n4njc95n9p3GKz/IzPFK82PCbdhsvM1eat3PSANNJFGHKRXLhbZK/FWUihjbCV3rGgqmIKaT3/I/Q+Xa+RQAPCT7eSw='
+    password: '{cipher}AQCBzVw2KsgaGZ5J2725UB2yl1BawjdF6jS4/NqkAgaArGxbUhMfjNGT5qPFVYRUxN5/ABEIdjaGbFHmViga0rJUGIeIB4G5Q8l+vNqu0FAsKe3LOz6qjcZeevD/0djzAJrNUtuaaIknmUMtQ9XdWSCFE44fOvH1tegYYl/Ns6XIXF+rloJQIWFGn1rg6rxNtaRoKoRXjRVjLHFU03Nzrpj/IQvTHYe3MV67eyKxsjfe77nzg5r+sxiwmfIU3Sfh+7xKmTC/gJ0cVa7ZniwL1lbh3agY+XuIecxpzTXunZAGf6regVlOhD3JgYeMCHGpL3N4VS0hYsKdJ2ednj5FGCWpJWO873gTTEBFKVRx+Yybtb4IAQ0CIldrOiIgfraxfHU='
 
 #
 eureka:
@@ -32,3 +32,10 @@ eureka:
 logging:
   level:
     com.example.orderservice: DEBUG
+
+encrypt:
+  #  key: awleskfjoasuidhgikuh12o98urhf89rehg3j2kn4fv89dtfhvhniuk23n890vfds098fu34wf9nj
+  key-store:
+    location: file:///${user.home}/keystore/apiEncryptionKey.jks
+    password: test1234
+    alias: apiEncryptionKey
