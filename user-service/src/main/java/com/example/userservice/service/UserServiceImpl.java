@@ -6,6 +6,8 @@ import java.util.UUID;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
+import org.springframework.cloud.client.circuitbreaker.CircuitBreaker;
+import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
@@ -38,7 +40,8 @@ public class UserServiceImpl implements UserService {
 	private final Environment env;
 	private final OrderServiceClient orderServiceClient;
 	// private final RestTemplate restTemplate;
-
+	private final CircuitBreakerFactory circuitBreakerFactory;
+	
 	@Override
 	public UserDto createUser(UserDto userDto) {
 		userDto.setUserId(UUID.randomUUID().toString());
@@ -77,7 +80,12 @@ public class UserServiceImpl implements UserService {
 		// }
 
 		/* ErrorDecoder */
-		List<ResponseOrder> orderListResponse = orderServiceClient.getOrders(userId);
+//		List<ResponseOrder> orderListResponse = orderServiceClient.getOrders(userId);
+
+		CircuitBreaker circuitbreaker = circuitBreakerFactory.create("circuitbreaker");
+		List<ResponseOrder> orderListResponse = circuitbreaker.run(() -> orderServiceClient.getOrders(userId),
+				throwable -> new ArrayList<>());
+
 		userDto.setOrders(orderListResponse);
 		return userDto;
 	}
