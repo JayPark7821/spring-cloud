@@ -17,7 +17,7 @@ configurations {
 repositories {
     mavenCentral()
 }
-+-
+
 
 ext {
     set('springCloudVersion', "2021.0.4")
@@ -34,6 +34,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.cloud:spring-cloud-starter-bus-amqp'
     implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j'
+
+    implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
+    implementation 'org.springframework.cloud:spring-cloud-starter-zipkin:2.2.3.RELEASE'
 //    Feign client
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 

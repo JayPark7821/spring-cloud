@@ -12,10 +12,10 @@ import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 
-@EnableKafka
-@Configuration
+//@EnableKafka
+//@Configuration
 public class KafkaConsumerConfig {
-	@Bean
+//	@Bean
 	public ConsumerFactory<String, String> consumerFactory() {
 		Map<String, Object> properties = new HashMap<>();
 		properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "~~~~~~~~~~~~~");
@@ -26,7 +26,7 @@ public class KafkaConsumerConfig {
 		return new DefaultKafkaConsumerFactory<>(properties);
 	}
 
-	@Bean
+//	@Bean
 	public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory() {
 		ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory
 			= new ConcurrentKafkaListenerContainerFactory<>();
