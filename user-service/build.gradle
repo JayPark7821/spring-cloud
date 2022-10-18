@@ -40,6 +40,8 @@ dependencies {
 //    Feign client
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 
+    implementation 'io.micrometer:micrometer-registry-prometheus'
+
     implementation 'org.modelmapper:modelmapper:2.3.8'
     implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
     compileOnly 'org.projectlombok:lombok'

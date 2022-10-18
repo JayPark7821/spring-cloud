@@ -45,3 +45,9 @@ encrypt:
     location: file:///${user.home}/keystore/apiEncryptionKey.jks
     password: test1234
     alias: apiEncryptionKey
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, httptrace, info, metrics, prometheus
